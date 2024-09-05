@@ -13,7 +13,7 @@ interface IToDoListContext {
   toDoList: IToDoList[]
   createToDoItem: (content:string) => void
   setAsCompleted: (id:string) => void
-  deleteToDoItem: () => void
+  deleteToDoItem: (id:string) => void
   deleteCompletedToDoItem: () => void
   dragToDoItem: (result:DropResult) => void
 }
@@ -66,8 +66,12 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
     setToDoList(updatedToDoList)
   }
 
-  const deleteToDoItem = () => {
+  const deleteToDoItem = (id:string) => {
+    const filteredList = toDoList.filter((item)=>(
+      item.id !== id
+    ))
 
+    setToDoList(filteredList)
   }
 
   const deleteCompletedToDoItem = () => {

@@ -13,7 +13,7 @@ interface ITask {
 
 export default function Task ({task, id, index, status}:ITask) {
 
-  const {setAsCompleted} = useContext(ToDoListContext)
+  const {setAsCompleted, deleteToDoItem} = useContext(ToDoListContext)
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -42,7 +42,7 @@ export default function Task ({task, id, index, status}:ITask) {
             `}>
             {task}
           </p>
-          <button aria-label="Delete Task" className="size-3 col-start-10 row-start-1">
+          <button aria-label="Delete Task" className="size-3 col-start-10 row-start-1" onClick={()=>{deleteToDoItem(id)}}>
             <img src={CrossIcon} alt="" />
           </button>
         </li>
