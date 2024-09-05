@@ -9,7 +9,9 @@ export default {
     extend: {
       colors: {
         "primary": {
-          "bright-blue": "hsl(220, 98%, 61%)"
+          "bright-blue": "hsl(220, 98%, 61%)",
+          "cyan":"hsl(192, 100%, 67%)",
+          "purple":"hsl(280, 87%, 65%)"
         },
         "dark-theme": {
           "very-light-gray":"hsl(0, 0%, 98%)",
@@ -42,6 +44,8 @@ export default {
         "3xl":"2000px",
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar")
+  ],
 }
 
