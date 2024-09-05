@@ -19,7 +19,7 @@ export default function HeaderBanner () {
   }
 
   return (
-    <figure className="flex justify-center relative">
+    <figure className="flex justify-center absolute top-0">
       <picture>
         <source srcSet={isDark?DskDarkThemeBg:DskLightThemeBg} media="(min-width:376px)"/>
         <img src={isDark?MblDarkThemeBg:MblLightThemeBg} alt="" className={`
