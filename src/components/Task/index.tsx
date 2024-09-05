@@ -35,7 +35,10 @@ export default function Task ({task, id, index, status}:ITask) {
               status==="completed" ? 
               <img src={CheckIcon} alt="" />
               :
-              <div className="size-[18px] bg-white rounded-full"></div>
+              <div className={`
+                size-[18px] bg-white rounded-full
+                lg:size-[22px]
+                `}></div>
               }
           </div>
           <p className={`

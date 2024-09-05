@@ -3,6 +3,8 @@ import idGenerator from "../mod/idGenerator";
 import { DropResult } from "@hello-pangea/dnd";
 
 type TaskStatusType = "completed" | "uncompleted"
+type TaskiFilterType = "all" | "uncompleted" | "completed"
+
 export interface IToDoList {
   id: string
   task: string
@@ -11,6 +13,8 @@ export interface IToDoList {
 
 interface IToDoListContext {
   toDoList: IToDoList[]
+  taskFilter: TaskiFilterType
+  changeFilter: (type:TaskiFilterType) => void
   createToDoItem: (content:string) => void
   setAsCompleted: (id:string) => void
   deleteToDoItem: (id:string) => void
@@ -44,6 +48,12 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
       task: "Study Svelte"
     }
   ])
+  const [taskFilter, setTaskFilter] = useState<TaskiFilterType>("all")
+
+  const changeFilter = (type:TaskiFilterType) => {
+    setTaskFilter(type)
+  }
+
 
   const createToDoItem = (content:string) => {
     setToDoList([...toDoList, 
@@ -97,7 +107,7 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
   }
 
   return (
-    <ToDoListContext.Provider value={{toDoList,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
+    <ToDoListContext.Provider value={{toDoList,taskFilter,changeFilter,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
       {children}
     </ToDoListContext.Provider>
   )

@@ -3,7 +3,7 @@ import { ToDoListContext } from "../../context/ToDoListContext"
 
 export default function Filter() {
 
-  const {toDoList, deleteCompletedToDoItem} = useContext(ToDoListContext)
+  const {toDoList, taskFilter, changeFilter, deleteCompletedToDoItem} = useContext(ToDoListContext)
 
   return (
     <footer className={`
@@ -13,10 +13,25 @@ export default function Filter() {
       <p className="text-sm">
         {toDoList.filter((task) => (task.status === "uncompleted")).length} itens left
       </p>
-      <div className="flex gap-x-4">
-        <button className="text-sm font-bold">All</button>
-        <button className="text-sm font-bold">Active</button>
-        <button className="text-sm font-bold">Completed</button>
+      <div className={`
+        flex justify-center absolute -bottom-16 left-0 right-0 py-4 rounded-lg gap-x-4 bg-dark-theme-very-light-gray
+        lg:static lg:py-0
+        `}>
+        <button className={`
+          text-sm font-bold
+          ${taskFilter==="all"?"text-primary-bright-blue":""}
+          `} 
+          onClick={()=>{changeFilter("all")}}>All</button>
+        <button className={`
+          text-sm font-bold
+          ${taskFilter==="uncompleted"?"text-primary-bright-blue":""}
+          `} 
+          onClick={()=>{changeFilter("uncompleted")}}>Active</button>
+        <button className={`
+          text-sm font-bold
+          ${taskFilter==="completed"?"text-primary-bright-blue":""}
+          `} 
+          onClick={()=>{changeFilter("completed")}}>Completed</button>
       </div>
       <button onClick={() => { deleteCompletedToDoItem() }} className="text-sm">Clear Completed</button>
     </footer>
