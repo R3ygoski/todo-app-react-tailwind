@@ -29,9 +29,15 @@ export default function HeaderBanner () {
           3xl:h-[538px]
           `}/>
       </picture>
-      <header className="flex justify-between items-center absolute top-11 w-full max-w-[592px] px-6">
-        <h1 className="uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray">todo</h1>
-        <button onClick={()=>{handleTheme()}} aria-label="Theme Change" title="Change Theme" className="size-5">
+      <header className={`
+        flex justify-between items-center absolute top-11 w-full max-w-[592px] px-6
+        lg:top-[4.5rem]
+        `}>
+        <h1 className={`
+          uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray
+          lg:text-5xl
+        `}>todo</h1>
+        <button onClick={()=>{handleTheme()}} aria-label="Theme Change" title="Change Theme" className="size-5 lg:size-7">
           {<img src={isDark?SunIcon:MoonIcon} alt=""/>}
         </button>
       </header>

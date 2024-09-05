@@ -21,11 +21,13 @@ export default function Task ({task, id, index, status}:ITask) {
         <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`
         grid grid-cols-10 min-h-[3.35rem] pl-5 py-4 border-b-[1px] border-light-theme-dark-grayish-blue/25 items-center
         active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
+        lg:min-h-[3.975rem] lg:pl-6
         `}>
           <div className={`
             row-start-1 flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
             hover:from-primary-cyan hover:to-primary-purple
             ${status==="completed" ? "from-primary-cyan to-primary-purple":"from-light-theme-dark-grayish-blue/25 to-light-theme-dark-grayish-blue/25"}
+            lg:size-6
             `} 
             onClick={()=>{setAsCompleted(id)}}
             >
@@ -39,6 +41,7 @@ export default function Task ({task, id, index, status}:ITask) {
           <p className={`
             text-sm self-end row-start-1 col-start-2 col-end-10 cursor-grab
             ${status==="completed" ? "line-through text-light-theme-dark-grayish-blue":"text-light-theme-very-dark-desaturated-blue"}
+            lg:text-lg
             `}>
             {task}
           </p>
