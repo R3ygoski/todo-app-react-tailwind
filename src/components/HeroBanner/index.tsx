@@ -19,7 +19,7 @@ export default function HeaderBanner () {
   }
 
   return (
-    <figure className="relative">
+    <figure className="flex justify-center relative">
       <picture>
         <source srcSet={isDark?DskDarkThemeBg:DskLightThemeBg} media="(min-width:376px)"/>
         <img src={isDark?MblDarkThemeBg:MblLightThemeBg} alt="" className={`
@@ -29,7 +29,7 @@ export default function HeaderBanner () {
           3xl:h-[538px]
           `}/>
       </picture>
-      <header className="flex justify-between items-center absolute top-11 w-full px-6">
+      <header className="flex justify-between items-center absolute top-11 w-full max-w-[592px] px-6">
         <h1 className="uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray">todo</h1>
         <button onClick={()=>{handleTheme()}} aria-label="Theme Change" title="Change Theme" className="size-5">
           {<img src={isDark?SunIcon:MoonIcon} alt=""/>}
