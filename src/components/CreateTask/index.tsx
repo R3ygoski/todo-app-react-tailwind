@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ToDoListContext } from "../../context/ToDoListContext"
 
 export default function CreateTask () {
 
+  const [task, setTask] = useState<string>("")
+
+  const {createToDoItem} = useContext(ToDoListContext)
+
   const handleKeyPress = (ev:React.KeyboardEvent<HTMLFormElement>) => {
-    if (ev.key === "Enter") return 0
+    if (ev.key === "Enter"){
+      createToDoItem(task)
+      setTask("")
+    }
   }
 
-  const [task, setTask] = useState<string>("")
 
   return (
     <form 
