@@ -10,8 +10,9 @@ export default function DisplayList () {
 
   return (
     <section className={`
-    flex flex-col justify-between absolute top-[10.75rem] w-[85%] max-w-[542px] max-h-[60vh] rounded-lg shadow-2xl bg-dark-theme-very-light-gray
-    lg:top-[15.5rem]
+    flex flex-col justify-between relative mt-4 w-[85%] max-w-[542px] max-h-[60vh] rounded-lg shadow-2xl bg-dark-theme-very-light-gray
+    lg:mt-8
+    dark:bg-light-theme-very-dark-desaturated-blue
     `}>
       <Droppable droppableId="todoList" direction="vertical" type="list">
         {(provided)=>(
@@ -27,7 +28,7 @@ export default function DisplayList () {
       </Droppable>
       <Filter/>
       <p className={`
-        absolute -bottom-28 w-full text-center text-light-theme-dark-grayish-blue
+        absolute -bottom-28 left-0 right-0 w-full text-center text-light-theme-dark-grayish-blue
         lg:-bottom-20
         `}>Drag and drop to reorder list</p>
     </section>

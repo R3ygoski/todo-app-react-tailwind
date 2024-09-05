@@ -6,7 +6,7 @@ import DskDarkThemeBg from "../../assets/img/bg-desktop-dark.jpg"
 import MoonIcon from "../../assets/svg/icon-moon.svg"
 import SunIcon from "../../assets/svg/icon-sun.svg"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function HeaderBanner () {
 
@@ -16,10 +16,24 @@ export default function HeaderBanner () {
     setIsDark(!isDark)
     const html = document.querySelector("html")
     html?.classList.toggle("dark")
+    localStorage.setItem("theme", isDark?"light":"dark")
   }
 
+  useEffect(()=>{
+    setIsDark(localStorage.getItem("theme") === "dark" ?true:false)
+    const html = document.querySelector("html")
+    if (localStorage.getItem("theme")==="dark"){
+      html?.classList.toggle("dark")
+    } else {
+      html?.classList.toggle("light")
+    }
+  },[])
+
   return (
-    <figure className="flex justify-center absolute top-0">
+    <figure className={`
+    flex justify-center absolute top-0
+    dark:shadow-xl
+    `}>
       <picture>
         <source srcSet={isDark?DskDarkThemeBg:DskLightThemeBg} media="(min-width:376px)"/>
         <img src={isDark?MblDarkThemeBg:MblLightThemeBg} alt="" className={`

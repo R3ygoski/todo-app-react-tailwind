@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import idGenerator from "../mod/idGenerator";
 import { DropResult } from "@hello-pangea/dnd";
 
@@ -26,29 +26,18 @@ const ToDoListContext = createContext<IToDoListContext>({} as IToDoListContext)
 
 const ToDoListProvider = ({children}:{children:ReactNode}) => {
 
-  const [toDoList, setToDoList] = useState<IToDoList[]>([
-    {
-      id: idGenerator(8),
-      status: "completed",
-      task: "Study React"
-    },
-    {
-      id: idGenerator(8),
-      status: "uncompleted",
-      task: "Study Vue"
-    },
-    {
-      id: idGenerator(8),
-      status: "uncompleted",
-      task: "Study Angular"
-    },
-    {
-      id: idGenerator(8),
-      status: "uncompleted",
-      task: "Study Svelte"
-    }
-  ])
+  const [toDoList, setToDoList] = useState<IToDoList[]>(()=>{
+    const list = localStorage.getItem("toDoList")
+    return list ? JSON.parse(list) : []
+  })
   const [taskFilter, setTaskFilter] = useState<TaskiFilterType>("all")
+
+  useEffect(()=>{
+    if (toDoList.length > 0){
+      localStorage.setItem("toDoList", JSON.stringify(toDoList))
+    }
+  },[toDoList])
+
 
   const changeFilter = (type:TaskiFilterType) => {
     setTaskFilter(type)
@@ -63,7 +52,8 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
         task: content
       }
     ]
-  )}
+  )
+  }
 
   const setAsCompleted = (id:string) => {
     const updatedToDoList:IToDoList[] = toDoList.map((item)=>{
@@ -80,7 +70,6 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
     const filteredList = toDoList.filter((item)=>(
       item.id !== id
     ))
-
     setToDoList(filteredList)
   }
 

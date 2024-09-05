@@ -12,7 +12,10 @@ function App() {
   return (
     <>
       <HeaderBanner/>
-      <main className="flex flex-col items-center w-full h-screen bg-slate-200">
+      <main className={`
+        flex flex-col items-center w-full h-screen
+        dark:bg-light-theme-very-dark-blue
+        `}>
         <CreateTask/>
         <DragDropContext onDragEnd={dragToDoItem}>
           <DisplayList/>

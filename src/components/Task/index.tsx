@@ -20,8 +20,9 @@ export default function Task ({task, id, index, status}:ITask) {
       {(provided)=>(
         <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`
         grid grid-cols-10 min-h-[3.35rem] pl-5 py-4 border-b-[1px] border-light-theme-dark-grayish-blue/25 items-center
-        active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
+        active:rounded-lg active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
         lg:min-h-[3.975rem] lg:pl-6
+        dark:active:bg-light-theme-very-dark-desaturated-blue/50
         `}>
           <div className={`
             row-start-1 flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
@@ -38,13 +39,15 @@ export default function Task ({task, id, index, status}:ITask) {
               <div className={`
                 size-[18px] bg-white rounded-full
                 lg:size-[22px]
+                dark:bg-light-theme-very-dark-desaturated-blue
                 `}></div>
               }
           </div>
           <p className={`
             text-sm self-end row-start-1 col-start-2 col-end-10 cursor-grab
-            ${status==="completed" ? "line-through text-light-theme-dark-grayish-blue":"text-light-theme-very-dark-desaturated-blue"}
             lg:text-lg
+
+            ${status==="completed" ? "line-through text-light-theme-dark-grayish-blue dark:text-light-theme-very-dark-grayish-blue-2":"text-light-theme-very-dark-desaturated-blue dark:text-light-theme-light-grayish-blue dark:hover:text-light-theme-light-grayish-blue-hv"}
             `}>
             {task}
           </p>
