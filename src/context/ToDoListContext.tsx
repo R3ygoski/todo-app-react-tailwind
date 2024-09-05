@@ -12,6 +12,7 @@ export interface IToDoList {
 interface IToDoListContext {
   toDoList: IToDoList[]
   createToDoItem: (content:string) => void
+  setAsCompleted: (id:string) => void
   deleteToDoItem: () => void
   deleteCompletedToDoItem: () => void
   dragToDoItem: (result:DropResult) => void
@@ -54,6 +55,17 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
     ]
   )}
 
+  const setAsCompleted = (id:string) => {
+    const updatedToDoList:IToDoList[] = toDoList.map((item)=>{
+      if (item.id === id){
+        return {...item, status: item.status === "completed" ? "uncompleted" : "completed"}
+      }
+      return item
+    })
+
+    setToDoList(updatedToDoList)
+  }
+
   const deleteToDoItem = () => {
 
   }
@@ -81,7 +93,7 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
   }
 
   return (
-    <ToDoListContext.Provider value={{toDoList,createToDoItem,deleteCompletedToDoItem,deleteToDoItem,dragToDoItem}}>
+    <ToDoListContext.Provider value={{toDoList,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
       {children}
     </ToDoListContext.Provider>
   )

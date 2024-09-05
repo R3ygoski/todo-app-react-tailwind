@@ -1,7 +1,8 @@
 import { Draggable } from "@hello-pangea/dnd"
 import CrossIcon from "../../assets/svg/icon-cross.svg"
 import CheckIcon from "../../assets/svg/icon-check.svg"
-import { useEffect, useState } from "react"
+import { useContext } from "react"
+import { ToDoListContext } from "../../context/ToDoListContext"
 
 interface ITask {
   task: string
@@ -12,42 +13,33 @@ interface ITask {
 
 export default function Task ({task, id, index, status}:ITask) {
 
-  const [taskCompleted, setTaskCompleted] = useState<boolean>(false)
-
-  const setAsCompleted = () => {
-    status = "completed"
-  }
-
-  useEffect(()=>{
-    if (status==="completed") {
-      setTaskCompleted(true)
-    } else {
-      return
-    }
-  },[status])
+  const {setAsCompleted} = useContext(ToDoListContext)
 
   return (
     <Draggable draggableId={id} index={index}>
       {(provided)=>(
         <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`
-        grid grid-cols-10 h-[3.35rem] pl-5 py-4 border-b-[1px] border-light-theme-dark-grayish-blue/25 items-center
+        grid grid-cols-10 min-h-[3.35rem] pl-5 py-4 border-b-[1px] border-light-theme-dark-grayish-blue/25 items-center
         active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
         `}>
           <div className={`
             row-start-1 flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
             hover:from-primary-cyan hover:to-primary-purple
-            ${taskCompleted ? "from-primary-cyan to-primary-purple":"from-light-theme-dark-grayish-blue/25 to-light-theme-dark-grayish-blue/25"}
+            ${status==="completed" ? "from-primary-cyan to-primary-purple":"from-light-theme-dark-grayish-blue/25 to-light-theme-dark-grayish-blue/25"}
             `} 
-            onClick={()=>{setTaskCompleted(!taskCompleted);setAsCompleted()}}
+            onClick={()=>{setAsCompleted(id)}}
             >
               {
-              taskCompleted ? 
+              status==="completed" ? 
               <img src={CheckIcon} alt="" />
               :
               <div className="size-[18px] bg-white rounded-full"></div>
               }
           </div>
-          <p className="text-sm self-end row-start-1 col-start-2 col-end-10 cursor-grab">
+          <p className={`
+            text-sm self-end row-start-1 col-start-2 col-end-10 cursor-grab
+            ${status==="completed" ? "line-through text-light-theme-dark-grayish-blue":"text-light-theme-very-dark-desaturated-blue"}
+            `}>
             {task}
           </p>
           <button aria-label="Delete Task" className="size-3 col-start-10 row-start-1">

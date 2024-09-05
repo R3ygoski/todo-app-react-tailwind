@@ -19,11 +19,11 @@ export default function DisplayList () {
           </ul>
         )}
       </Droppable>
-      <footer className="flex justify-between items-center min-h-12 px-4 rounded-b-lg bg-dark-theme-very-light-gray">
+      <footer className="flex justify-between items-center min-h-12 px-4 rounded-b-lg bg-dark-theme-very-light-gray text-light-theme-dark-grayish-blue">
         <p className="text-sm">
           {toDoList.filter((task)=>(task.status==="uncompleted")).length} itens left
         </p>
-        <button onClick={()=>{deleteCompletedToDoItem()}}>Clear Completed</button>
+        <button onClick={()=>{deleteCompletedToDoItem()}} className="text-sm">Clear Completed</button>
       </footer>
     </section>
   ) 
