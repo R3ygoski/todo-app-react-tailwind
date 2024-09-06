@@ -18,9 +18,9 @@ export default function DisplayList () {
         {(provided)=>(
           <ul ref={provided.innerRef} {...provided.droppableProps} className="overflow-y-scroll scrollbar-none">
             {taskFilter==="all"? toDoList.map((task, idx)=>(
-              <Task key={task.id} task={task.task} id={task.id} index={idx} status={task.status}/>
+              <Task key={task.id} task={task.task} parentId={task.id} index={idx} status={task.status} subtasks={task.subtasks}/>
             )): toDoList.filter((task) => (task.status === taskFilter)).map((task, idx)=>(
-              <Task key={task.id} task={task.task} id={task.id} index={idx} status={task.status}/>
+              <Task key={task.id} task={task.task} parentId={task.id} index={idx} status={task.status} subtasks={task.subtasks}/>
             ))}
           {provided.placeholder}
           </ul>

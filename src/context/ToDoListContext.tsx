@@ -10,10 +10,16 @@ interface IFeedback {
   state: boolean
 }
 
+export interface ISubtasks {
+  id: string
+  content: string
+}
+
 export interface IToDoList {
   id: string
   task: string
   status: TaskStatusType
+  subtasks: ISubtasks[]
 }
 
 interface IToDoListContext {
@@ -22,9 +28,12 @@ interface IToDoListContext {
   feedbackState: IFeedback
   changeFilter: (type:TaskiFilterType) => void
   createToDoItem: (content:string) => void
+  createToDoSubtask: (parentId:string) => void
+  changeSubtaskContent: (id:string, newContent:string, parentId: string) => void
   setAsCompleted: (id:string) => void
   deleteToDoItem: (id:string) => void
   deleteCompletedToDoItem: () => void
+  deleteSubtask: (id:string, parentId:string) => void
   dragToDoItem: (result:DropResult) => void
 }
 
@@ -59,7 +68,8 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
       {
         id: idGenerator(8),
         status: "uncompleted",
-        task: content
+        task: content,
+        subtasks: []
       }
     ])
     setFeedbackState({
@@ -72,6 +82,33 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
         state: false
       })
     },3000)
+  }
+
+  const createToDoSubtask = (parentId:string) => {
+    toDoList.find((item)=>{
+      if(item.id === parentId){
+        return {...item, subtasks: item.subtasks.push({
+          id: idGenerator(10),
+          content: "Type here..."
+        })}
+      }
+    })
+
+   setToDoList([...toDoList])
+  }
+
+  const changeSubtaskContent = (id:string, newContent:string, parentId: string) => {
+    toDoList.find((task)=>{
+      if (task.id === parentId){
+        return {...task, subtasks: task.subtasks.find((subtask)=>{
+          if (subtask.id === id){
+            subtask.content = newContent
+          }
+        })}
+      }
+    })
+
+    setToDoList([...toDoList])
   }
 
   const setAsCompleted = (id:string) => {
@@ -99,6 +136,19 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
     localStorage.setItem("toDoList", JSON.stringify(filteredList))
   }
 
+  const deleteSubtask = (id: string, parentId: string) => {
+    const updatedList = toDoList.map((task)=>{
+      if (task.id === parentId){
+        return {...task, subtasks: task.subtasks.filter((subtask)=>{
+          return subtask.id !== id
+        })}
+      }
+      return task
+    })
+    
+    setToDoList(updatedList)
+  }
+
   const dragToDoItem = (result:DropResult) => {
     if (!result.destination) return
 
@@ -117,7 +167,7 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
   }
 
   return (
-    <ToDoListContext.Provider value={{toDoList,taskFilter, feedbackState,changeFilter,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
+    <ToDoListContext.Provider value={{toDoList,taskFilter,feedbackState,changeFilter,createToDoItem,createToDoSubtask,changeSubtaskContent,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,deleteSubtask,dragToDoItem}}>
       {children}
     </ToDoListContext.Provider>
   )
