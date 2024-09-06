@@ -32,6 +32,28 @@ export default {
       },
       letterSpacing: {
         "widest":"0.2em"
+      },
+      keyframes: {
+        "feedback": {
+          "0%": {
+            transform: "translateY(-3rem)",
+          },
+          "10%": {
+            transform: "translateY(1.25rem)",
+          },
+          "50%":{
+            transform: "translateY(1rem)",
+          },
+          "90%": {
+            transform: "translateY(1.25rem)",
+          },
+          "100%": {
+            transform: "translateY(-3rem)",
+          },
+        }
+      },
+      animation: {
+        "feedback": "feedback 3s ease-in-out alternate forwards"
       }
     },
     screens: {

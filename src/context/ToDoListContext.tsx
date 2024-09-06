@@ -5,6 +5,11 @@ import { DropResult } from "@hello-pangea/dnd";
 type TaskStatusType = "completed" | "uncompleted"
 type TaskiFilterType = "all" | "uncompleted" | "completed"
 
+interface IFeedback {
+  message: string
+  state: boolean
+}
+
 export interface IToDoList {
   id: string
   task: string
@@ -14,6 +19,7 @@ export interface IToDoList {
 interface IToDoListContext {
   toDoList: IToDoList[]
   taskFilter: TaskiFilterType
+  feedbackState: IFeedback
   changeFilter: (type:TaskiFilterType) => void
   createToDoItem: (content:string) => void
   setAsCompleted: (id:string) => void
@@ -31,6 +37,10 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
     return list ? JSON.parse(list) : []
   })
   const [taskFilter, setTaskFilter] = useState<TaskiFilterType>("all")
+  const [feedbackState, setFeedbackState] = useState<IFeedback>({
+    message: "",
+    state: false
+  })
 
   useEffect(()=>{
     if (toDoList.length > 0){
@@ -51,8 +61,17 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
         status: "uncompleted",
         task: content
       }
-    ]
-  )
+    ])
+    setFeedbackState({
+      message: "Task created successfully!",
+      state: true
+    })
+    setTimeout(()=>{
+      setFeedbackState({
+        message: "...", 
+        state: false
+      })
+    },3000)
   }
 
   const setAsCompleted = (id:string) => {
@@ -96,7 +115,7 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
   }
 
   return (
-    <ToDoListContext.Provider value={{toDoList,taskFilter,changeFilter,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
+    <ToDoListContext.Provider value={{toDoList,taskFilter, feedbackState,changeFilter,createToDoItem,deleteCompletedToDoItem,setAsCompleted,deleteToDoItem,dragToDoItem}}>
       {children}
     </ToDoListContext.Provider>
   )

@@ -4,6 +4,7 @@ import DisplayList from "./components/DisplayList"
 import { DragDropContext } from "@hello-pangea/dnd"
 import { useContext } from "react"
 import { ToDoListContext } from "./context/ToDoListContext"
+import FeedbackCard from "./components/FeedbackCard"
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <>
+      <FeedbackCard/>
       <HeaderBanner/>
       <main className={`
         flex flex-col items-center w-full h-screen
