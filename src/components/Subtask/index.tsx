@@ -33,8 +33,10 @@ export default function Subtask ({parentId, id,content}:ISubtasksProps) {
     odd:hover:bg-light-theme-dark-grayish-blue/20
     `}>
       <p className="text-sm sm:text-base text-light-theme-dark-grayish-blue" onClick={()=>{setSubtaskState(true)}}>{content}</p>
-      {subtaskState && <input type="text" className={`absolute h-full w-5/6 top-0 rounded-lg px-2 text-sm text-light-theme-very-dark-grayish-blue-2 outline-none
-        focus:border-[1px] border-primary-bright-blue
+      {subtaskState && <input type="text" className={`
+        absolute h-full w-5/6 top-0 rounded-lg px-2 outline-none text-sm text-light-theme-very-dark-grayish-blue-2
+        focus:border-b-2 focus:border-primary-bright-blue
+        lg:text-base
         `} onKeyDown={(ev)=>{handleKeyPress(ev)}} value={subtask} onChange={(ev)=>{setNewSubtask(ev.target.value)}}/>
       }
       <button className="absolute right-4 top-1/2 z-10 text-[#494C6Bcc] -translate-y-1/2" onClick={()=>{deleteSubtask(id, parentId)}}>

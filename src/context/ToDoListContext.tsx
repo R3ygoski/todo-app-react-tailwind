@@ -98,6 +98,12 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
   }
 
   const changeSubtaskContent = (id:string, newContent:string, parentId: string) => {
+
+    if (newContent === "") {
+      deleteSubtask(id, parentId)
+      return
+    }
+
     toDoList.find((task)=>{
       if (task.id === parentId){
         return {...task, subtasks: task.subtasks.find((subtask)=>{
