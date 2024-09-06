@@ -26,7 +26,8 @@ export default function Task ({task, parentId, index, status, subtasks}:ITask) {
           active:rounded-lg active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
           lg:min-h-[3.975rem] lg:pl-6
           dark:active:bg-light-theme-very-dark-desaturated-blue/50
-          ${subtasks.length<1 && "border-b-[1px]"}
+          ${subtasks.length<=0 && "border-b-[1px]"}
+          ${subtasks.length>0 && "active:rounded-b-none"}
           `}>
             <div className={`
               row-start-1 flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
