@@ -90,11 +90,13 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
       item.id !== id
     ))
     setToDoList(filteredList)
+    localStorage.setItem("toDoList", JSON.stringify(filteredList))
   }
 
   const deleteCompletedToDoItem = () => {
     const filteredList = toDoList.filter((task)=>(task.status==="uncompleted"))
     setToDoList(filteredList)
+    localStorage.setItem("toDoList", JSON.stringify(filteredList))
   }
 
   const dragToDoItem = (result:DropResult) => {
