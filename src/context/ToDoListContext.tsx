@@ -64,6 +64,7 @@ const ToDoListProvider = ({children}:{children:ReactNode}) => {
 
 
   const createToDoItem = (content:string) => {
+    if (content === "" || content.trim().length === 0) return
     setToDoList([...toDoList, 
       {
         id: idGenerator(8),
