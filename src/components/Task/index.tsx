@@ -22,7 +22,7 @@ export default function Task ({task, parentId, index, status, subtasks}:ITask) {
       {(provided)=>(
         <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
           <div className={`
-          grid grid-cols-10 min-h-[3.35rem] pl-5 py-4 border-light-theme-dark-grayish-blue/25 items-center
+          grid grid-cols-10 min-h-[3.35rem] pl-2 py-4 border-light-theme-dark-grayish-blue/25 items-center
           active:rounded-lg active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
           lg:min-h-[3.975rem] lg:pl-6
           dark:active:bg-light-theme-very-dark-desaturated-blue/50
@@ -30,7 +30,7 @@ export default function Task ({task, parentId, index, status, subtasks}:ITask) {
           ${subtasks.length>0 && "active:rounded-b-none"}
           `}>
             <div className={`
-              row-start-1 flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
+              row-start-1 place-self-center flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
               hover:from-primary-cyan hover:to-primary-purple
               ${status==="completed" ? "from-primary-cyan to-primary-purple":"from-light-theme-dark-grayish-blue/25 to-light-theme-dark-grayish-blue/25"}
               lg:size-6
@@ -49,14 +49,14 @@ export default function Task ({task, parentId, index, status, subtasks}:ITask) {
                 }
             </div>
             <p className={`
-              text-sm self-end row-start-1 col-start-2 col-end-10 cursor-grab
+              text-sm self-end row-start-1 col-start-2 col-end-9 cursor-grab overflow-hidden text-ellipsis
               lg:text-lg
 
               ${status==="completed" ? "line-through text-light-theme-dark-grayish-blue dark:text-light-theme-very-dark-grayish-blue-2":"text-light-theme-very-dark-desaturated-blue dark:text-light-theme-light-grayish-blue dark:hover:text-light-theme-light-grayish-blue-hv"}
               `}>
               {task}
             </p>
-            <button aria-label="Delete Task" className="size-fit col-start-8 row-start-1 place-self-center lg:col-start-9" onClick={()=>{createToDoSubtask(parentId)}} title="Add Subtask">
+            <button aria-label="Delete Task" className="size-fit col-start-9 row-start-1 place-self-center lg:col-start-9" onClick={()=>{createToDoSubtask(parentId)}} title="Add Subtask">
               <FiPlus className="text-xl text-[#494C6B88]"/>
             </button>
             <button aria-label="Delete Task" className="size-fit col-start-10 row-start-1 place-self-center lg:col-start-10 rotate-45" onClick={()=>{deleteToDoItem(parentId)}} title="Delete Task">
