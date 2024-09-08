@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor](https://your-solution-url.com)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/todo-app-made-with-react-and-tailwind-_WEkbZPh9b)
 - Live Site URL: [Github](https://r3ygoski.github.io/todo-app-react-tailwind/)
 
 ## My process
