@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin 'tailwind-scrollbar';
+
+@import './styles/color.css';
+@import './styles/breakpoints.css';
+@import './styles/animation.css';
+@import './styles/variables.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 * {
   font-family: "Josefin Sans", sans-serif;

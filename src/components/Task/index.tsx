@@ -23,14 +23,14 @@ export default function Task ({task, parentId, index, status, subtasks}:ITask) {
         <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
           <div className={`
           grid grid-cols-10 min-h-[3.35rem] pl-2 py-4 border-light-theme-dark-grayish-blue/25 items-center
-          active:rounded-lg active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-sm
+          active:rounded-lg active:bg-dark-theme-very-light-gray/50 active:backdrop-blur-xs
           lg:min-h-[3.975rem] lg:pl-6
           dark:active:bg-light-theme-very-dark-desaturated-blue/50
-          ${subtasks.length<=0 && "border-b-[1px]"}
+          ${subtasks.length<=0 && "border-b"}
           ${subtasks.length>0 && "active:rounded-b-none"}
           `}>
             <div className={`
-              row-start-1 place-self-center flex items-center justify-center size-5 rounded-full bg-gradient-to-br cursor-pointer
+              row-start-1 place-self-center flex items-center justify-center size-5 rounded-full bg-linear-to-br cursor-pointer
               hover:from-primary-cyan hover:to-primary-purple
               ${status==="completed" ? "from-primary-cyan to-primary-purple":"from-light-theme-dark-grayish-blue/25 to-light-theme-dark-grayish-blue/25"}
               lg:size-6

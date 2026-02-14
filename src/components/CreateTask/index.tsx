@@ -20,12 +20,12 @@ export default function CreateTask () {
     onKeyDown={(ev)=>{handleKeyPress(ev)}} 
     onSubmit={(ev)=>{ev.preventDefault()}}
     className={`
-    flex items-center relative mt-[6.5rem] w-full max-w-[592px] h-12 px-6
+    flex items-center relative mt-26 w-full max-w-[592px] h-12 px-6
     lg:mt-36 lg:h-16
     `}>
       <input type="text" id="createToDo" value={task} onChange={(ev)=>{setTask(ev.target.value)}} 
       className={`
-      peer w-full h-full rounded-md px-6 outline-none text-light-theme-very-dark-grayish-blue-2 shadow-lg
+      peer w-full h-full rounded-md px-6 outline-hidden text-light-theme-very-dark-grayish-blue-2 shadow-lg
       focus:border-b-2 focus:border-primary-bright-blue
       lg:text-xl
       dark:bg-light-theme-very-dark-desaturated-blue dark:text-light-theme-light-grayish-blue

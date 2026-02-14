@@ -45,7 +45,7 @@ export default function HeaderBanner () {
       </picture>
       <header className={`
         flex justify-between items-center absolute top-11 w-full max-w-[592px] px-6
-        lg:top-[4.5rem]
+        lg:top-18
         `}>
         <h1 className={`
           uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray
