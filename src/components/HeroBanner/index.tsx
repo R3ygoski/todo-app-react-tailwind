@@ -1,60 +1,61 @@
-import MblLightThemeBg from "../../assets/img/bg-mobile-light.jpg"
-import MblDarkThemeBg from "../../assets/img/bg-mobile-dark.jpg"
-import DskLightThemeBg from "../../assets/img/bg-desktop-light.jpg"
-import DskDarkThemeBg from "../../assets/img/bg-desktop-dark.jpg"
+import MblLightThemeBg from "../../assets/img/bg-mobile-light.jpg";
+import MblDarkThemeBg from "../../assets/img/bg-mobile-dark.jpg";
+import DskLightThemeBg from "../../assets/img/bg-desktop-light.jpg";
+import DskDarkThemeBg from "../../assets/img/bg-desktop-dark.jpg";
 
-import MoonIcon from "../../assets/svg/icon-moon.svg"
-import SunIcon from "../../assets/svg/icon-sun.svg"
+import MoonIcon from "../../assets/svg/icon-moon.svg";
+import SunIcon from "../../assets/svg/icon-sun.svg";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-export default function HeaderBanner () {
-
-  const [isDark, setIsDark] = useState<boolean>(false)
+export default function HeaderBanner() {
+  const [isDark, setIsDark] = useState<boolean>(false);
 
   const handleTheme = () => {
-    setIsDark(!isDark)
-    const html = document.querySelector("html")
-    html?.classList.toggle("dark")
-    localStorage.setItem("theme", isDark?"light":"dark")
-  }
+    setIsDark(!isDark);
+    const html = document.querySelector("html");
+    html?.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "light" : "dark");
+  };
 
-  useEffect(()=>{
-    setIsDark(localStorage.getItem("theme") === "dark" ?true:false)
-    const html = document.querySelector("html")
-    if (localStorage.getItem("theme")==="dark"){
-      html?.classList.toggle("dark")
+  useEffect(() => {
+    setIsDark(localStorage.getItem("theme") === "dark" ? true : false);
+    const html = document.querySelector("html");
+    if (localStorage.getItem("theme") === "dark") {
+      html?.classList.toggle("dark");
     } else {
-      html?.classList.toggle("light")
+      html?.classList.toggle("light");
     }
-  },[])
+  }, []);
 
   return (
-    <figure className={`
-    flex justify-center absolute top-0
-    dark:shadow-xl
-    `}>
+    <figure className="flex justify-center absolute top-0 dark:shadow-xl">
       <picture>
-        <source srcSet={isDark?DskDarkThemeBg:DskLightThemeBg} media="(min-width:376px)"/>
-        <img src={isDark?MblDarkThemeBg:MblLightThemeBg} alt="" className={`
-          h-[214px] object-cover
-          lg:h-[334px]
-          2xl:h-[418px]
-          3xl:h-[538px]
-          `}/>
+        <source
+          srcSet={isDark ? DskDarkThemeBg : DskLightThemeBg}
+          media="(min-width:376px)"
+        />
+        <img
+          src={isDark ? MblDarkThemeBg : MblLightThemeBg}
+          alt=""
+          className="h-53.5 object-cover lg:h-83.5 2xl:h-104.5 3xl:h-134.5"
+        />
       </picture>
-      <header className={`
-        flex justify-between items-center absolute top-11 w-full max-w-[592px] px-6
-        lg:top-18
-        `}>
-        <h1 className={`
-          uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray
-          lg:text-5xl
-        `}>todo</h1>
-        <button onClick={()=>{handleTheme()}} aria-label="Theme Change" title="Change Theme" className="size-5 lg:size-7">
-          {<img src={isDark?SunIcon:MoonIcon} alt=""/>}
+      <header className="flex justify-between items-center absolute top-11 w-full max-w-148 px-6 lg:top-18">
+        <h1 className="uppercase font-bold text-3xl tracking-widest text-dark-theme-very-light-gray lg:text-5xl">
+          todo
+        </h1>
+        <button
+          onClick={() => {
+            handleTheme();
+          }}
+          aria-label="Theme Change"
+          title="Change Theme"
+          className="size-5 cursor-pointer lg:size-7"
+        >
+          {<img src={isDark ? SunIcon : MoonIcon} alt="" />}
         </button>
       </header>
     </figure>
-  ) 
+  );
 }
